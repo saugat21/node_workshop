@@ -1,20 +1,21 @@
-<html>
+<!-- <html>
 
 <head>
-    <title>user</title>
 
-</head>
+
+
+</head> -->
 
 <body>
-    <h1>Usesr page</h1>
-    <table class="table">
-        <thead>
+    <h1>User page</h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
             <tr>
                 <th>sn</th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Address</th>
                 <th>Created at</th>
-
                 <th>Updated at</th>
                 <th>Action</th>
             </tr>
@@ -40,12 +41,19 @@
                     <td>
                         <%= item.updateddAt %>
                     </td>
+                    <td class="d-flex gap-2">
+                        <a href="/user/edit/<%= item.id %>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/user/delete/<%= item.id %>" class="btn btn-danger btn-sm">Delete</a>
+
+                    </td>
 
                 </tr>
 
                 <% })%>
         </tbody>
     </table>
-</body>
 
-</html>
+
+    <!-- </body>
+
+</html> -->
