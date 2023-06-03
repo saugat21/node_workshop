@@ -8,11 +8,13 @@
 
 <body>
     <h1>User page</h1>
+    <a href="/user/new" class="btn btn-primary">New</a>
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
             <tr>
                 <th>sn</th>
                 <th>Name</th>
+                <th>username</th>
                 <th>Email</th>
                 <th>Address</th>
                 <th>Created at</th>
@@ -28,6 +30,9 @@
                     </td>
                     <td>
                         <%= item.name %>
+                    </td>
+                    <td>
+                        <%= item.username %>
                     </td>
                     <td>
                         <%= item.email %>
