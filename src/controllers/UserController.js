@@ -1,17 +1,24 @@
 
 const User = require("@/models/UserModel");
+const bcrypt = require('bcrypt');
 
 module.exports = {
     index: async (req, res) => {
-        const list = await User.findAll();
+        const list = await User.findAll({
+            attributes: ['id', 'name', 'username', 'email', 'address', 'createdAt', 'updatedAt'],
+            order: [['id']]
+        })
+
         res.render('user/index', { list });
     },
     new: async (req, res) => {
         res.render('user/new');
     },
     newPost: async (req, res) => {
-        const { name, email, address } = req.body;
-        const user = User.build({ name, email, address });
+        const { name, email, address, username, password } = req.body;
+        const user = User.build({ name, email, address, username, password });
+        const hashPassword = await bcrypt.hash(password, 5);
+        user.password = hashPassword;
         await user.save();
         res.redirect('/user');
     },
@@ -23,13 +30,14 @@ module.exports = {
     editPost: async (req, res) => {
         const id = req.params.id;
         const user = await User.findByPk(id);
-        const { name, email, address } = req.body;
+        const { name, email, address, username } = req.body;
         user.name = name;
         user.email = email;
         user.address = address;
+        user.username = username;
         user.update();
         await user.save();
-        res.redirect('/user')
+        res.redirect('/user');
     },
     delete: async (req, res) => {
         const id = req.params.id;
